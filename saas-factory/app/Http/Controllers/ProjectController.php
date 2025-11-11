@@ -6,17 +6,25 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+/**
+ * @mixin \Illuminate\Foundation\Auth\Access\AuthorizesRequests
+ */
 class ProjectController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $projects = Auth::user()->projects()->latest()->get();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $projects = $user->projects()->latest()->get();
 
-        return Inertia::render('Projects/Index', [
+        return Inertia::render('projects/index', [
             'projects' => $projects,
         ]);
     }

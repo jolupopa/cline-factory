@@ -1,0 +1,25 @@
+1 - añade nombre a las rutas para trabajarlas dentro de backend de laravel.
+2 - En resource/js todos los nombres de directorios y nombres de archivo de  componentes estan en minusculas en este peroyecto ¡¡ ponlo como regla !! corregir los existentes y su propagacion en controladores en el render
+		-- resoureces/js/pages/ Proyects e Index  deberian estar en minusculas, deberia ser projects/index de acuerdo a la estructura de la app.
+3 - En el controlador ProjectController me muestra 2 errores de advertencias de mi entorno de desarrollo :
+	--la ruta de la vista es Projects/Index deberia ser projects/index de acuerdo a la estructura de la app.
+	--en Auth::user()->projects()->latest()->get(); marca error el metodo 'project' no esta definido.
+		para evitarlos cada vez que debuelva un objeto dale el tipo de dato usando un DocBlock @var en la línea anterior: ¡¡ ponlo como regla !!
+	-- en $this->authorize('update', $project); marca error el metodo 'autorize' no esta definido
+		para corregirlo añade el DocBlock //@mixin \Illuminate\Foundation\Auth\Access\AuthorizesRequests justo antes de la definición de la clase ProjectController. ¡¡ ponlo como regla en controlladores para el su uso!!
+	
+	
+4 - En resoursce/js/types/Ziggy.dts lo has creado tu ? porque este fullstack no usa ziggy para manejar rutas sino wayfinder.	
+5 - En features/projects/components/ :
+	.. en ProjectForm estas usando rutas Ziggy cuando en el proyecto inertia usa wayfinder para rutas en el front ¡¡ ponlo como regla !! y corregir  estos archivos
+	
+6 - En resources/js/types/ no deberia estar ziggy.tds ya que inertia ya no usa ziggy	
+	
+7 - revisa si el primer teset si esta correcto
+
+8.- el uso del componente Form en Resource/js/pages/settings/profile es el uso actual y eficiente en inertia agregalo para que lo recuerdes como se usa y corrije en ProjectForm que actualmente arroja error y por eso no va a pasar los test
+
+9 - siempre despues de crear una feature crear sus test y comprobar que pasen sino corregir hasta que pase y continuar con la siguiente tarea ¡¡ ponlo como regla !!
+
+
+dale prioridad segun sea lo mas eficiente para corregir, añadir o refaccionar.
