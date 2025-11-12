@@ -1,0 +1,79 @@
+
+Plantilla de Prompt Sugerida:
+
+"Hola Cline,
+
+Necesito tu ayuda para extender la aplicación 'SaaS Factory' con una nueva funcionalidad de renta vehicular. El sistema actual ya cuenta con autenticación de usuarios y un dashboard básico.
+
+Objetivo Principal:
+Quiero construir una plataforma donde:
+
+Clientes puedan buscar y rentar vehículos.
+Propietarios puedan listar sus vehículos para renta y gestionar sus rentas.
+Entidades Clave (Modelos de Datos):
+Considerando la base de datos PostgreSQL y Laravel Eloquent, las entidades principales serían:
+
+Vehículo: Con atributos como marca, modelo, año, tipo, precio por día, disponibilidad, propietario (relación con User).
+Renta: Con atributos como vehículo rentado, cliente (relación con User), fechas de inicio y fin, estado de la renta (pendiente, confirmada, completada, cancelada).
+Usuario (existente): Necesitará un rol (cliente/propietario) o un mecanismo para diferenciar sus permisos y funcionalidades.
+Funcionalidades Principales Requeridas:
+
+Para Propietarios:
+
+Gestión de Vehículos (CRUD):
+Crear, ver, editar y eliminar sus propios vehículos.
+Subir imágenes de los vehículos.
+Marcar vehículos como disponibles/no disponibles.
+Gestión de Rentas:
+Ver las solicitudes de renta para sus vehículos.
+Aceptar o rechazar solicitudes de renta.
+Ver el historial de rentas de sus vehículos.
+Para Clientes:
+
+Búsqueda de Vehículos:
+Buscar vehículos por marca, modelo, tipo, rango de fechas.
+Ver detalles de los vehículos (descripción, imágenes, precio).
+Proceso de Renta:
+Seleccionar un vehículo y fechas de renta.
+Enviar una solicitud de renta.
+Ver el estado de sus solicitudes de renta.
+Ver el historial de sus rentas.
+Integración con el Sistema Existente:
+
+La autenticación de usuarios (Laravel Fortify) debe ser reutilizada.
+El dashboard existente debe ser extendido para incluir enlaces y vistas específicas para clientes y propietarios.
+Los usuarios existentes deben poder ser asignados como 'propietarios' o 'clientes' (o ambos).
+Directrices de Implementación (Basadas en CLINE.md):
+
+Backend (Laravel):
+Crear los modelos Eloquent (Vehicle, Rental) y sus migraciones.
+Implementar controladores (VehicleController, RentalController) siguiendo la estructura MVC.
+MUY IMPORTANTE: Utilizar Eloquent API Resources para todas las respuestas JSON que involucren los modelos Vehicle y Rental, asegurando un tipado consistente para el frontend.
+Implementar políticas de autorización (VehiclePolicy, RentalPolicy) para controlar el acceso (ej. un propietario solo puede gestionar sus propios vehículos).
+Frontend (React/TypeScript con Inertia):
+Organizar la nueva funcionalidad bajo una estructura Feature-First, por ejemplo, resources/js/features/vehicles y resources/js/features/rentals.
+Crear las páginas de Inertia necesarias (ej. pages/vehicles/Index.tsx, pages/rentals/Create.tsx).
+Utilizar Laravel Wayfinder para todas las rutas en el frontend, eliminando cualquier dependencia de Ziggy.
+Implementar formularios usando el componente Form de @inertiajs/react integrado con Wayfinder.
+Asegurar que todos los componentes y vistas sean completamente responsivos (mobile, tablet, desktop) utilizando las utilidades de Tailwind CSS.
+Testing:
+Incluir tests de backend (PHPUnit/Pest) para los nuevos modelos, controladores y políticas.
+Incluir tests de frontend (Vitest/React Testing Library) para los nuevos componentes, hooks y flujos de usuario.
+Pasos Iniciales Sugeridos (para ti, Cline):
+
+Crear las migraciones y modelos para Vehicle y Rental.
+Generar los API Resources correspondientes.
+Extender el modelo User para incluir roles o un mecanismo de diferenciación.
+Crear las rutas iniciales en Laravel.
+Generar las rutas de Wayfinder.
+Por favor, dime si necesitas más aclaraciones o si tienes alguna pregunta antes de empezar a planificar la implementación.
+
+Explicación de por qué este prompt es efectivo:
+
+Claridad del Objetivo: Define claramente qué se quiere lograr.
+Detalle de Entidades: Proporciona los modelos de datos esperados, lo que me permite empezar a pensar en la estructura de la base de datos.
+Funcionalidades Específicas: Detalla las acciones que cada tipo de usuario (propietario, cliente) debe poder realizar.
+Integración Clara: Especifica cómo la nueva funcionalidad se conectará con el sistema existente (autenticación, dashboard).
+Adherencia a CLINE.md: Al mencionar explícitamente el uso de API Resources, Wayfinder, Feature-First y responsividad, me estás recordando y guiando para seguir las mejores prácticas definidas en el documento. Esto es crucial para un desarrollo asistido por IA eficiente.
+Pasos Iniciales Sugeridos: Me das una idea de por dónde te gustaría que empiece, lo cual es útil para alinear nuestras expectativas.
+Con un prompt así, tengo suficiente contexto para empezar a planificar la implementación de la nueva funcionalidad de renta vehicular de manera coherente con la arquitectura y los principios de desarrollo de tu proyecto.
