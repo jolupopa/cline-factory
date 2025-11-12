@@ -152,6 +152,8 @@ resources/js/
 
 **Principios**: Cada "feature" debe ser lo más autónoma posible. Las pages de Inertia deben actuar como orquestadores, utilizando componentes y lógica de las carpetas `components`, `hooks`, `layouts` y `features`. Gestión de Rutas: Usar Laravel Wayfinder exclusivamente para rutas tipadas en frontend (ver sección dedicada abajo). Eliminar cualquier referencia a Ziggy.
 
+**Diseño Responsivo**: Todas las vistas y componentes deben ser responsivos para mobile, tablet y desktop, utilizando las utilidades de Tailwind CSS (ej. breakpoints como sm:, md:, lg:). Priorizar mobile-first y probar en diferentes tamaños de pantalla.
+
 ### Gestión de Rutas en Frontend: Laravel Wayfinder (Exclusivo)
 
 ⚠️ **Nota Importante**: Wayfinder es el paquete oficial para la gestión de rutas en el frontend (React/TypeScript). Ziggy NO se utiliza; eliminar cualquier archivo relacionado (ej. `resources/js/types/ziggy.d.ts`).
@@ -287,7 +289,8 @@ import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileCo
 *   Una responsabilidad clara por componente.
 *   Utilizar `props` para la comunicación de datos.
 *   Preferir componentes funcionales con Hooks.
-*   Formularios: Usar `Form` de Inertia con Wayfinder para tipado y manejo automático de estado/errores.
+*   **Formularios**: Usar `Form` de Inertia con Wayfinder para tipado y manejo automático de estado/errores.
+*   **Responsividad**: Aplicar clases Tailwind responsivas en todos los componentes (ej. `flex flex-col md:flex-row`); asegurar accesibilidad y fluidez en mobile (≤640px), tablet (641px-1024px) y desktop (≥1025px).
 
 ## 🧪 Estrategia de Testing
 
@@ -296,13 +299,14 @@ import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileCo
 *   **Unit Tests**: Para lógica de negocio, servicios, modelos.
 *   **Feature Tests**: Para controladores, rutas, interacciones con la base de datos.
 *   **Pest**: Preferido para tests más concisos y legibles.
-*   **NUEVO**: Tests para API Resources: Verificar transformaciones JSON con assertions en respuestas (ej. `->assertJsonStructure()`).
+*   **Tests para API Resources**: Verificar transformaciones JSON con assertions en respuestas (ej. `->assertJsonStructure()`).
 
 ### Frontend (Vitest / React Testing Library)
 
 *   **Unit Tests**: Para componentes aislados, hooks, utilidades (incluyendo hooks de Wayfinder).
 *   **Integration Tests**: Para la interacción entre componentes y formularios Inertia.
 *   **React Testing Library**: Para probar el comportamiento del usuario.
+*   **Tests de Responsividad**: Usar herramientas como `@testing-library/jest-dom` o emuladores para verificar renderizado en breakpoints (ej. con `window.matchMedia` mocks).
 
 ## 🔒 Mejores Prácticas de Seguridad
 
@@ -321,7 +325,7 @@ import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileCo
 
 *   Nunca registrar datos sensibles.
 *   Cifrar datos en reposo y en tránsito (HTTPS).
-*   **NUEVO**: En API Resources, excluir campos sensibles (ej. `password`) usando condicionales o traits.
+*   En API Resources, excluir campos sensibles (ej. `password`) usando condicionales o traits.
 
 ## 🤖 Directrices para Cline AI
 
@@ -332,9 +336,10 @@ import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileCo
 *   Implementar manejo de errores robusto.
 *   Incluir tests relevantes para el código nuevo o modificado.
 *   Priorizar la reutilización de componentes y hooks existentes.
-*   **NUEVO**: Usar Wayfinder para todas las rutas en frontend; integrar `Form` de Inertia para formularios.
-*   **NUEVO**: Siempre que se termine una feature, crear sus tests de prueba correspondientes y solo continuar con la siguiente una vez que estos pasen.
-*   **NUEVO**: Al obtener datos de modelos, sugerir/crear API Resource correspondiente; usarlo en controladores para respuestas JSON.
+*   Usar Wayfinder para todas las rutas en frontend; integrar `Form` de Inertia para formularios.
+*   Siempre que se termine una feature, crear sus tests de prueba correspondientes y solo continuar con la siguiente una vez que estos pasen.
+*   Al obtener datos de modelos, sugerir/crear API Resource correspondiente; usarlo en controladores para respuestas JSON.
+*   Asegurar que todos los componentes/vistas incluyan diseño responsivo con Tailwind; sugerir pruebas en múltiples dispositivos.
 
 ### Al Revisar Código
 
@@ -342,8 +347,9 @@ import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileCo
 *   Validar las mejores prácticas de seguridad.
 *   Sugerir optimizaciones de rendimiento.
 *   Recomendar mejoras en la estrategia de testing.
-*   **NUEVO**: Asegurar eliminación de Ziggy; validar tipado en Wayfinder y sincronía con backend.
-*   **NUEVO**: Verificar uso de API Resources en endpoints que retornan modelos; asegurar exclusión de datos sensibles.
+*   Asegurar eliminación de Ziggy; validar tipado en Wayfinder y sincronía con backend.
+*   Verificar uso de API Resources en endpoints que retornan modelos; asegurar exclusión de datos sensibles.
+*   Revisar responsividad en componentes: confirmar uso de breakpoints Tailwind y sugerir fixes si no cubre mobile/tablet/desktop.
 
 ### Prioridad de Contexto
 
